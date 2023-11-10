@@ -35,6 +35,7 @@ const Home = () => {
 					onChange={(e) => setTarea(e.target.value)}
 					value={tarea}
 					onKeyDownCapture={Enter}
+					placeholder="Pone algo "
 				/>
 			</div>
 			<ul className="list-group mt-3">
