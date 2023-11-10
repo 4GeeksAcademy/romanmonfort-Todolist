@@ -1,26 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
-
-//create your first component
 const Home = () => {
+	const [tarea, setTarea] = useState("");
+	const [lista, setLista] = useState([]);
+
+	const agregarElemento = () => {
+		if (tarea.trim() !== "") {
+			setLista([...lista, tarea])
+			setTarea("")
+		} else {
+			alert("Ingrese algo")
+		}
+	};
+	const Enter = (e) => {
+		if (e.key === "Enter") {
+			agregarElemento();
+		}
+
+	}
+
+	const Eliminar = (index) => {
+		const nuevaLista = [...lista];
+		nuevaLista.splice(index, 1);
+		setLista(nuevaLista);
+	};
+
+
 	return (
 		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+			<h1>TODO</h1>
+			<div className="d-flex justify-content-center align-items-center">
+				<input
+					type="text"
+					onChange={(e) => setTarea(e.target.value)}
+					value={tarea}
+					onKeyDownCapture={Enter}
+				/>
+			</div>
+			<ul className="list-group mt-3">
+				{lista.map((tarea, index) => (
+					<li key={index} className="list-group-item">
+						{tarea}<button key={index} className="ms-5 btn btn-danger" onClick={Eliminar} >X</button>
+					</li>
+				))}
+			</ul>
 		</div>
+
+
 	);
 };
 
 export default Home;
+
