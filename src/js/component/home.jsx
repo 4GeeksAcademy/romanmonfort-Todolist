@@ -19,9 +19,9 @@ const Home = () => {
 
 	}
 
-	const Eliminar = (index) => {
+	const Eliminar = (key) => {
 		const nuevaLista = [...lista];
-		nuevaLista.splice(index, 1);
+		nuevaLista.splice(key, 1);
 		setLista(nuevaLista);
 	};
 
@@ -49,7 +49,7 @@ const Home = () => {
 				{lista.map((tarea, index) => (
 				  <li key={index} className=" list-group-item d-flex justify-content-between align-items-center">
 					<p>{tarea}</p>
-					<i class="fa-solid fa-x" style={{color: '#ff0000'}} key={index} onClick={Eliminar}></i>
+					<i class="fa-solid fa-x" style={{color: '#ff0000'}} key={index} onClick={() => Eliminar(index)}></i>
 				  </li>
 				))}
 			  </ul>
